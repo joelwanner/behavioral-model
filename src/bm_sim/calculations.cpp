@@ -810,7 +810,6 @@ struct hmac {
         uint8_t out[16];
 
         hmac_helper h;
-        h.main((uint8_t *) buf, len/16, out, key);
 
         std::cout << "EXTERN CALLED: length=" << len << std::endl;
         std::cout << "key:" << std::endl;
@@ -823,6 +822,9 @@ struct hmac {
             printf("%x ", (unsigned char)buf[i]);
         }
         std::cout << std::endl;
+
+        h.main((uint8_t *) buf, len/16, out, key);
+
         std::cout << "out:" << std::endl;
         for (size_t i = 0; i < 16; ++i) {
             printf("%x ", (unsigned char)out[i]);
