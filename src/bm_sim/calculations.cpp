@@ -814,7 +814,6 @@ struct hmac_hash {
         return 42;
     }
 };
-REGISTER_HASH(hmac_hash);
 // -- EXTERN
 
 }  // namespace
@@ -830,6 +829,9 @@ REGISTER_HASH(csum16);
 REGISTER_HASH(identity);
 REGISTER_HASH(round_robin);
 REGISTER_HASH(round_robin_consistent);
+// EXTERN
+REGISTER_HASH(hmac_hash);
+// -- EXTERN
 
 using crc8_custom = crc_custom<uint8_t>;
 REGISTER_HASH(crc8_custom);
