@@ -810,24 +810,32 @@ struct hmac {
         uint8_t out[16];
 
         hmac_helper h;
+        h.main((uint8_t *) buf, len/16, out, key);
+
         std::cout << "EXTERN CALLED: length=" << len << std::endl;
         std::cout << "key:" << std::endl;
         for (size_t i = 0; i < 16; ++i) {
-            printf("%x ", (char)key[i]);
+            printf("%x ", (unsigned char)key[i]);
         }
         std::cout << std::endl;
         std::cout << "in:" << std::endl;
         for (size_t i = 0; i < len; ++i) {
-            printf("%x ", (char)buf[i]);
+            printf("%x ", (unsigned char)buf[i]);
         }
         std::cout << std::endl;
-        h.main((uint8_t *) buf, len, out, key);
         std::cout << "out:" << std::endl;
         for (size_t i = 0; i < 16; ++i) {
-            printf("%x ", (char)out[i]);
+            printf("%x ", (unsigned char)out[i]);
         }
         std::cout << std::endl;
-        return 42;
+
+        uint64_t r = 0;
+        for (int i = 0; i < 8; ++i) {
+            uint64_t b = (uint64_t) out[16-1-i];
+            r |= b<<(i*8);
+        }
+        printf("returning %lx\n", r);
+        return r;
     }
 };
 // -- EXTERN
