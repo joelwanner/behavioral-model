@@ -427,7 +427,7 @@ struct round_robin_consistent {
 
 typedef uint8_t state_t[4][4];
 
-class hmac {
+class hmac_helper {
 private:
     struct AES_ctx
     {
@@ -804,12 +804,12 @@ public:
     }
 };
 
-struct hmac_hash {
+struct hmac {
     uint64_t operator()(const char *buf, size_t len) const {
         uint8_t key[] = { 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c };
         uint8_t out[16];
 
-        hmac h;
+        hmac_helper h;
         h.main((uint8_t *) buf, len, out, key);
         return 42;
     }
@@ -830,7 +830,7 @@ REGISTER_HASH(identity);
 REGISTER_HASH(round_robin);
 REGISTER_HASH(round_robin_consistent);
 // EXTERN
-REGISTER_HASH(hmac_hash);
+REGISTER_HASH(hmac);
 // -- EXTERN
 
 using crc8_custom = crc_custom<uint8_t>;
