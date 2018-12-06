@@ -40,7 +40,7 @@
 // you can also choose the field from which the priority value will be read, as
 // well as the number of priority queues per port
 // PRIORITY 0 IS THE LOWEST PRIORITY
-define SSWITCH_PRIORITY_QUEUEING_ON
+#define SSWITCH_PRIORITY_QUEUEING_ON
 
 #ifdef SSWITCH_PRIORITY_QUEUEING_ON
 #define SSWITCH_PRIORITY_QUEUEING_NB_QUEUES 8
